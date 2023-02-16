@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-mikser",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -16,6 +16,6 @@
   },
   "homepage": "https://github.com/almero-digital-marketing/vite-plugin-mikser#readme",
   "dependencies": {
-    "lowdb": "^5.0.5"
+    "lowdb": "^5.1.0"
   }
 }
