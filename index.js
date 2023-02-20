@@ -2,7 +2,7 @@ import path from 'node:path'
 import { LowSync } from 'lowdb'
 import { JSONFileSync } from 'lowdb/node'
 
-const mikserPlugin = ({ outputFolder, distFolder, buildFolder, runtimeFolder } = {}) => {
+const mikserPlugin = ({ outputFolder, distFolder, buildFolder, runtimeFolder, buildMode } = {}) => {
     return {
         name: 'mikser',
         config: (config, { command, mode }) => {
@@ -13,7 +13,7 @@ const mikserPlugin = ({ outputFolder, distFolder, buildFolder, runtimeFolder } =
             })
 
             if (command == 'build') {
-                const adapter = new JSONFileSync(path.join(runtimeFolder, `database.${mode}.json`))
+                const adapter = new JSONFileSync(path.join(runtimeFolder, `database.${buildMode || mode}.json`))
                 const database = new LowSync(adapter)
                 database.read()
                 database.data ||= { results: [] }
