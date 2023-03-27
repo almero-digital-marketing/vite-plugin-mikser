@@ -1,6 +1,5 @@
 import path from 'node:path'
-import { LowSync } from 'lowdb'
-import { JSONFileSync } from 'lowdb/node'
+import { readFileSync } from 'node:fs'
 
 const mikserPlugin = ({ outputFolder, distFolder, buildFolder, runtimeFolder, buildMode } = {}) => {
     return {
@@ -13,13 +12,11 @@ const mikserPlugin = ({ outputFolder, distFolder, buildFolder, runtimeFolder, bu
             })
 
             if (command == 'build') {
-                const adapter = new JSONFileSync(path.join(runtimeFolder, `database.${buildMode || mode}.json`))
-                const database = new LowSync(adapter)
-                database.read()
-                database.data ||= { results: [] }
+                const renderOutput = path.join(mikser.options.runtimeFolder, `output.${buildMode || mode}.json`)
+                const results = JSON.parse(readFileSync(renderOutput, 'utf8')) || []
     
                 const input = {}
-                database.data.results
+                results
                 .filter(entity => entity.destination && entity.destination.indexOf('.html') > -1)
                 .forEach(entity => {
                     input[entity.destination.substring(1)] = entity.destination
