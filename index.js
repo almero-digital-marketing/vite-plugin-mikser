@@ -12,7 +12,7 @@ const mikserPlugin = ({ outputFolder, distFolder, buildFolder, runtimeFolder, bu
             })
 
             if (command == 'build') {
-                const renderOutput = path.join(mikser.options.runtimeFolder, `output.${buildMode || mode}.json`)
+                const renderOutput = path.join(runtimeFolder, `render-details.json`)
                 const results = JSON.parse(readFileSync(renderOutput, 'utf8')) || []
     
                 const input = {}
