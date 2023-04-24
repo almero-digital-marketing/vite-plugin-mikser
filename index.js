@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { readFileSync } from 'node:fs'
 
-const mikserPlugin = ({ outputFolder, distFolder, buildFolder, runtimeFolder, buildMode } = {}) => {
+const mikserPlugin = ({ outputFolder, distFolder, buildFolder, runtimeFolder } = {}) => {
     return {
         name: 'mikser',
         config: (config, { command, mode }) => {
